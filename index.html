@@ -5646,20 +5646,27 @@ function toggleZone_place(id) {
   var SUGGEST_URL = 'https://docs.google.com/spreadsheets/d/11DgGNdlvQZOjdCVRT553c2vQFPM00B5TYiCkWOzgS7E/gviz/tq?tqx=out:json&sheet=%EC%8B%9D%EB%8B%B9%EC%A0%9C%EC%95%88';
 
   function parseGviz(text) {
-    var match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);\s*$/);
-    if (!match) return [];
     try {
-      var json = JSON.parse(match[1]);
-      var rows = json.table.rows;
-      var cols = json.table.cols;
+      // /*O_o*/ 앞부분 제거 후 파싱
+      var start = text.indexOf('google.visualization.Query.setResponse(');
+      if (start === -1) return [];
+      var inner = text.substring(start + 'google.visualization.Query.setResponse('.length);
+      // 마지막 ); 제거
+      inner = inner.replace(/\);\s*$/, '').trim();
+      var json = JSON.parse(inner);
+      var rows = json.table.rows || [];
+      var cols = json.table.cols || [];
       return rows.map(function(row) {
         var obj = {};
         cols.forEach(function(col, i) {
-          obj[col.label] = (row.c && row.c[i] && row.c[i].v !== null) ? row.c[i].v : '';
+          obj[col.label] = (row.c && row.c[i] && row.c[i] !== null && row.c[i].v !== null && row.c[i].v !== undefined) ? row.c[i].v : '';
         });
         return obj;
       });
-    } catch(e) { console.log('gviz 파싱 오류', e); return []; }
+    } catch(e) {
+      console.log('gviz 파싱 오류', e);
+      return [];
+    }
   }
 
   function loadAllReviews() {
