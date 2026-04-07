@@ -5631,7 +5631,10 @@ function toggleZone_place(id) {
   let _suggests = [];
 
   // 구글 시트에서 전체 리뷰 불러오기
+  var _reviewsReady = false;
+  var _reviewsReadyCallbacks = [];
   function loadAllReviews() {
+    _reviewsReady = false;
     fetch(GAS_URL + '?action=getReviews&name=ALL')
       .then(function(res){ return res.json(); })
       .then(function(data){
@@ -5640,9 +5643,12 @@ function toggleZone_place(id) {
           if (!_reviews[r.restaurant]) _reviews[r.restaurant] = [];
           _reviews[r.restaurant].push(r);
         });
+        _reviewsReady = true;
         renderAllReviewSummaries();
+        _reviewsReadyCallbacks.forEach(function(cb){ cb(); });
+        _reviewsReadyCallbacks = [];
       })
-      .catch(function(e){ console.log('리뷰 불러오기 실패', e); });
+      .catch(function(e){ console.log('리뷰 불러오기 실패', e); _reviewsReady = true; });
   }
 
   // 특정 식당 리뷰 불러오기
@@ -5961,28 +5967,17 @@ function openAllReviews() {
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
 
-  const hasData = Object.keys(_reviews || {}).some(k => (_reviews[k] || []).length > 0);
-  if (hasData) {
+  if (_reviewsReady) {
+    // 데이터 준비 완료 → 바로 렌더
     renderAllReviewModal('');
   } else {
+    // 아직 로딩 중 → 로딩 표시 후 완료 콜백 등록
     document.getElementById('allReviewList').innerHTML =
       '<div style="text-align:center;color:#9ca3af;padding:32px 0;font-size:13px">리뷰 불러오는 중... ⏳</div>';
     document.getElementById('allReviewStats').textContent = '';
-    fetch(GAS_URL + '?action=getReviews&name=ALL')
-      .then(res => res.json())
-      .then(data => {
-        _reviews = {};
-        data.forEach(r => {
-          if (!_reviews[r.restaurant]) _reviews[r.restaurant] = [];
-          _reviews[r.restaurant].push(r);
-        });
-        if (typeof renderAllReviewSummaries === 'function') renderAllReviewSummaries();
-        renderAllReviewModal('');
-      })
-      .catch(() => {
-        document.getElementById('allReviewList').innerHTML =
-          '<div style="text-align:center;color:#ef4444;padding:32px 0;font-size:13px">리뷰를 불러오지 못했어요 😢</div>';
-      });
+    _reviewsReadyCallbacks.push(function() {
+      if (modal.classList.contains('open')) renderAllReviewModal('');
+    });
   }
 }
 
