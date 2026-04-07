@@ -636,10 +636,10 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'대낚식당')">✏️ 리뷰</button>
   </div>
 </div>
-<div class="card" data-zone="a" data-cat="일식" data-zeropay="true" data-party="false">
+<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="false">
   <div class="card-main">
     <div class="cn">오부찌</div>
-    <div class="ct"><span class="tag tc">일식·이자카야</span><span class="tag tz">💳 비플</span></div>
+    <div class="ct"><span class="tag tc">한식·부대찌개</span><span class="tag tz">💳 비플</span></div>
   </div>
   <div class="card-sub">
     <span class="ca">뚝섬로 385-40</span>
@@ -1896,7 +1896,6 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'고깃바')">✏️ 리뷰</button>
   </div>
 </div>
-</div>
 <div class="card" data-zone="a" data-cat="중식" data-zeropay="true" data-party="false" data-search="짬뽕타운 성수">
   <div class="card-main">
     <div class="cn">짬뽕타운</div>
@@ -1910,6 +1909,21 @@ function toggleZone_place(id) {
     <span class="wb wb-a">🚶 0.1km</span>
     <button class="rbtn" onclick="openReview(event,'짬뽕타운')">✏️ 리뷰</button>
   </div>
+</div>
+<div class="card" data-zone="a" data-cat="일식" data-zeropay="true" data-party="false" data-place="2075745148">
+  <div class="card-main">
+    <div class="cn">우동키노야 성수점</div>
+    <div class="ct"><span class="tag tc">일식·우동</span><span class="tag tz">💳 비플</span></div>
+  </div>
+  <div class="card-sub">
+    <span class="ca"></span>
+    <div class="rsummary" id="rsummary-우동키노야 성수점"></div>
+  </div>
+  <div class="card-bot">
+    <span class="wb wb-a">🚶 A존</span>
+    <button class="rbtn" onclick="openReview(event,'우동키노야 성수점')">✏️ 리뷰</button>
+  </div>
+</div>
 </div>
     </div>
   </div>
@@ -5992,22 +6006,26 @@ document.querySelectorAll('.card').forEach(card => {
   });
 });
 
-// 카드 클릭 → 네이버 지도 (도로명 주소 우선)
+// 카드 클릭 → 네이버 지도 (place ID > 도로명 주소 > data-search > 식당명 순)
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('click', function(e) {
     if (e.target.classList.contains('mapbtn') || e.target.closest('.mapbtn')) return;
     if (e.target.classList.contains('rbtn') || e.target.closest('.rbtn')) return;
-    // 도로명 주소 우선, 없으면 data-search, 없으면 카드명 검색
+    // 1순위: data-place (네이버 place ID 직접 연결)
+    const placeId = this.getAttribute('data-place');
+    if (placeId) {
+      window.open('https://map.naver.com/p/entry/place/' + placeId, '_blank');
+      return;
+    }
+    // 2순위: 도로명 주소
     const addrEl = this.querySelector('.ca');
     const rawAddr = addrEl ? addrEl.textContent.trim() : '';
-    // 괄호 이후 제거하고 성동구 붙이기
     const cleanAddr = rawAddr.replace(/[\(（].*$/, '').trim();
     let query;
     if (cleanAddr && cleanAddr.match(/[로길]\s*\d/)) {
-      // 도로명 주소가 확인되면 "성동구 + 주소"로 검색
       query = '서울 성동구 ' + cleanAddr;
     } else {
-      // 주소 없거나 애매하면 data-search 또는 식당명
+      // 3순위: data-search 또는 식당명
       query = this.getAttribute('data-search') || this.querySelector('.cn')?.textContent.trim() || '';
     }
     if (query) window.open('https://map.naver.com/p/search/' + encodeURIComponent(query), '_blank');
