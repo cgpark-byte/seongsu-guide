@@ -134,13 +134,12 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f4f4f6;-webkit-font-smoot
 .empty{grid-column:1/-1;text-align:center;padding:40px 0;color:#9ca3af;font-size:13px}#page-food .empty span{display:block;font-size:28px;margin-bottom:8px}#page-food /* ── 푸터 ── */
 .footer{background:#16213e;color:rgba(255,255,255,0.5);padding:20px 16px;font-size:12px;line-height:1.7;text-align:center}#page-food .footer b{color:rgba(255,255,255,0.85)}#page-food /* ── FAB ── */
 .fab{
-  position:fixed;bottom:22px;right:18px;
   background:#e85d35;color:#fff;border:none;
   border-radius:50px;padding:11px 18px;
   font-size:13px;font-weight:700;cursor:pointer;
   font-family:inherit;box-shadow:0 4px 18px rgba(232,93,53,0.4);
   display:flex;align-items:center;gap:6px;
-  z-index:900;transition:transform 0.12s,box-shadow 0.12s
+  transition:transform 0.12s,box-shadow 0.12s
 }#page-food .fab:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,93,53,0.5)}
 
 #food-notice{background:#fffbeb !important;border-bottom:1px solid #fcd34d !important;padding:10px 16px !important;font-size:12px !important;color:#78350f !important;display:flex !important;gap:8px;align-items:flex-start;max-width:100%}
@@ -149,7 +148,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f4f4f6;-webkit-font-smoot
 /* 별점 전역 CSS (모달용) */
 .star-row span{font-size:26px;cursor:pointer;color:#d1d5db;transition:color .1s}
 .star-row span.on{color:#f59e0b !important}#page-food /* ── 모달 ── */
-.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:16px}#page-food .modal-ov.open{display:flex}#page-food .modal-box{background:#fff;border-radius:18px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);animation:mIn .2s ease}
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:16px}#page-food .modal-ov.open{display:flex}#allReviewModal.open{display:flex}#page-food .modal-box{background:#fff;border-radius:18px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.2);animation:mIn .2s ease}
 @keyframes mIn{#page-food from{opacity:0;transform:translateY(14px) scale(0.97)}#page-food to{opacity:1;transform:none}}#page-food .mhdr{padding:18px 22px 14px;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between}#page-food .mtitle{font-size:16px;font-weight:700}#page-food .mclose{background:none;border:none;font-size:20px;cursor:pointer;color:#9ca3af;padding:0 2px}#page-food .mbody{padding:18px 22px}#page-food .star-row{display:flex;gap:6px;margin-bottom:14px}#page-food .star-row span{font-size:26px;cursor:pointer;color:#d1d5db;transition:color .1s}#page-food .star-row span.on{color:#f59e0b}#page-food .fg{margin-bottom:12px}#page-food .fg label{display:block;font-size:11px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}#page-food .fg input, #page-food .fg textarea, #page-food .fg select{width:100%;border:1.5px solid #e5e7eb;border-radius:9px;padding:9px 11px;font-family:inherit;font-size:13.5px;color:#111;outline:none;resize:vertical;transition:border-color .15s}#page-food .fg input:focus, #page-food .fg textarea:focus, #page-food .fg select:focus{border-color:#6366f1}#page-food .fg textarea{min-height:72px}#page-food .btn-ok{width:100%;padding:12px;background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;border:none;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}#page-food .btn-ok:hover{opacity:.88}#page-food .rv-list{margin-top:18px}#page-food .rv-item{padding:12px 0;border-bottom:1px solid #f3f4f6}#page-food .rv-item:last-child{border-bottom:none}#page-food .rv-head{display:flex;justify-content:space-between;margin-bottom:4px}#page-food .rv-author{font-size:12.5px;font-weight:600}#page-food .rv-date{font-size:11px;color:#9ca3af}#page-food .rv-stars{color:#f59e0b;font-size:12px;margin-bottom:3px}#page-food .rv-text{font-size:12.5px;color:#374151;line-height:1.6}#page-food .rv-empty{text-align:center;color:#9ca3af;font-size:13px;padding:18px 0}#page-food .sug-item{background:#f9fafb;border-radius:9px;padding:11px 13px;margin-bottom:9px;border:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:flex-start}#page-food .sug-name{font-size:13.5px;font-weight:700}#page-food .sug-detail{font-size:11.5px;color:#9ca3af;margin-top:2px}#page-food .sug-badge{font-size:10.5px;padding:2px 7px;border-radius:14px;font-weight:600;white-space:nowrap;margin-left:8px;background:#fef3c7;color:#92400e}
 
 
@@ -378,7 +377,7 @@ function toggleZone_place(id) {
     <h1>성수동 <em>맛집 가이드</em> 🍽️</h1>
     <p class="hdr-desc">무신사 성수 S1으로 이전, 드디어 성수동으로 왔어요! 🎉<br>새로운 곳에서 맛있는 음식도 먹고 즐겁게 일해보아요 😊</p>
     <div class="hdr-stats">
-      <span class="stat-chip">🏪 총 288개 비플 가맹점</span>
+      <span class="stat-chip">🏪 총 289개 비플 가맹점</span>
       <span class="stat-chip">💳 2026.03 기준</span>
       <span class="stat-chip">🗺️ 클릭 → 네이버지도</span>
     </div>
@@ -454,7 +453,21 @@ function toggleZone_place(id) {
       </div>
     </div>
     <div class="zone-grid-wrap">
-      <div class="grid" id="grid-a"><div class="card" data-zone="a" data-cat="중식" data-zeropay="true" data-party="false" data-search="짬뽕타운 성수" onclick="window.open('https://map.naver.com/p/entry/place/31394620','_blank')">
+      <div class="grid" id="grid-a"><div class="card" data-zone="a" data-cat="일식" data-zeropay="true" data-party="false" onclick="window.open('https://map.naver.com/p/entry/place/2075745148','_blank')">
+  <div class="card-main">
+    <div class="cn">우동 키노야</div>
+    <div class="ct"><span class="tag tc">일식·우동</span><span class="tag tz">💳 비플</span></div>
+  </div>
+  <div class="card-sub">
+    <span class="ca">성수이로7길 (A존)</span>
+    <div class="rsummary" id="rsummary-우동 키노야"></div>
+  </div>
+  <div class="card-bot">
+    <span class="wb wb-a">🚶 A존</span>
+    <button class="rbtn" onclick="openReview(event,'우동 키노야')">✏️ 리뷰</button>
+  </div>
+</div>
+<div class="card" data-zone="a" data-cat="중식" data-zeropay="true" data-party="false" data-search="짬뽕타운 성수" onclick="window.open('https://map.naver.com/p/entry/place/31394620','_blank')">
   <div class="card-main">
     <div class="cn">짬뽕타운</div>
     <div class="ct"><span class="tag tc">중식·짬뽕·짜장</span><span class="tag tz">💳 비플</span></div>
@@ -4781,8 +4794,28 @@ function toggleZone_place(id) {
   </div>
 </div>
 
-<!-- 🍽️ FAB 버튼 -->
-<button class="fab" onclick="openAdd()">🍽️ 식당 제안</button>
+<!-- 🍽️ FAB 버튼 영역 -->
+<div style="position:fixed;bottom:24px;right:16px;display:flex;flex-direction:column;gap:10px;z-index:900">
+  <button class="fab" style="background:#3b82f6;font-size:13px;padding:12px 16px" onclick="openAllReviews()">⭐ 리뷰 모아보기</button>
+  <button class="fab" onclick="openAdd()">🍽️ 식당 제안</button>
+</div>
+
+<!-- ⭐ 전체 리뷰 모달 -->
+<div class="modal-ov" id="allReviewModal">
+  <div class="modal-box" style="max-height:80vh;display:flex;flex-direction:column">
+    <div class="mhdr">
+      <span class="mtitle">⭐ 전체 리뷰 모아보기</span>
+      <button class="mclose" onclick="closeModal('allReviewModal')">✕</button>
+    </div>
+    <div style="padding:4px 16px 8px;border-bottom:1px solid #f3f4f6">
+      <select id="allReviewSort" onchange="renderAllReviewModal()" style="font-size:13px;padding:4px 8px;border:1px solid #e5e7eb;border-radius:6px;color:#374151">
+        <option value="latest">최신순</option>
+        <option value="star">별점 높은순</option>
+      </select>
+    </div>
+    <div class="rv-list" id="allReviewList" style="overflow-y:auto;flex:1;padding:8px 16px"></div>
+  </div>
+</div>
 
   </div>
 
@@ -5535,14 +5568,80 @@ function toggleZone_place(id) {
   // 카드 클릭 이벤트 바인딩
   
   // ===== 구글 시트 API 연결 =====
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbxBBwCJb9d9HDCB4rXRpKVHHQRpY-GntwUhEijr1agXPQ-VYOUlZBE9cYb0lmFhJaNk/exec';
+  const GAS_URL = 'https://script.google.com/macros/s/AKfycbzyBtNDXB4T51IvHb-81JLlXpzjCyxW0hX-ksMnQOxz2zCbhYF60AviR7I2Y7j9cyMA';
+
+  // JSONP 헬퍼 (CORS 우회)
+  function jsonp(url, cbName, callback) {
+    window[cbName] = function(data) {
+      callback(data);
+      delete window[cbName];
+      var s = document.getElementById('jsonp_' + cbName);
+      if (s) s.parentNode.removeChild(s);
+    };
+    var script = document.createElement('script');
+    script.id = 'jsonp_' + cbName;
+    script.src = url + '&callback=' + cbName;
+    document.head.appendChild(script);
+  }
 
   let _reviews = {};
   let _suggests = [];
 
   // 구글 시트에서 전체 리뷰 불러오기
+
+  // ===== 전체 리뷰 모아보기 =====
+  var _allReviewsData = [];
+
+  function openAllReviews() {
+    openModal('allReviewModal');
+    var list = document.getElementById('allReviewList');
+    list.innerHTML = '<div class="review-empty">불러오는 중... ⏳</div>';
+    fetch(GAS_URL + '?action=getReviews&name=ALL', {redirect:'follow',mode:'cors'})
+      .then(function(res){ return res.json(); })
+      .then(function(data){
+        _allReviewsData = data;
+        renderAllReviewModal();
+      })
+      .catch(function(){
+        list.innerHTML = '<div class="review-empty">불러오기 실패. 다시 시도해주세요.</div>';
+      });
+  }
+
+  function renderAllReviewModal() {
+    var list = document.getElementById('allReviewList');
+    var sort = document.getElementById('allReviewSort').value;
+    var data = _allReviewsData.slice();
+
+    if (!data.length) {
+      list.innerHTML = '<div class="review-empty">아직 등록된 리뷰가 없어요 🙌</div>';
+      return;
+    }
+
+    if (sort === 'star') {
+      data.sort(function(a,b){ return b.star - a.star; });
+    } else {
+      // 최신순 (기본)
+      data.reverse();
+    }
+
+    list.innerHTML = data.map(function(r){
+      var stars = Array.from({length:5}, function(_,i){
+        return '<span style="color:' + (i < r.star ? '#f59e0b' : '#e5e7eb') + ';font-size:15px">★</span>';
+      }).join('');
+      return '<div class="review-item">' +
+        '<div class="review-item-header">' +
+          '<span style="font-weight:700;color:#111;font-size:13px">🍽️ ' + (r.restaurant || '') + '</span>' +
+          '<span class="review-date">' + (r.date || '') + '</span>' +
+        '</div>' +
+        '<div class="review-item-stars">' + stars + '</div>' +
+        '<div style="font-size:12px;color:#6b7280;margin-bottom:2px">' + (r.author || '익명') + '</div>' +
+        '<div class="review-item-text">' + (r.text || '') + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
   function loadAllReviews() {
-    fetch(GAS_URL + '?action=getReviews&name=ALL')
+    fetch(GAS_URL + '?action=getReviews&name=ALL', {redirect:'follow',mode:'cors'})
       .then(function(res){ return res.json(); })
       .then(function(data){
         _reviews = {};
@@ -5552,12 +5651,12 @@ function toggleZone_place(id) {
         });
         renderAllReviewSummaries();
       })
-      .catch(function(e){ console.log('리뷰 불러오기 실패', e); });
+      .catch(function(e){ console.log('리뷰 로드 실패', e); });
   }
 
   // 특정 식당 리뷰 불러오기
   function loadReviewsFor(name) {
-    fetch(GAS_URL + '?action=getReviews&name=' + encodeURIComponent(name))
+    fetch(GAS_URL + '?action=getReviews&name=' + encodeURIComponent(name), {redirect:'follow',mode:'cors'})
       .then(function(res){ return res.json(); })
       .then(function(data){
         _reviews[name] = data;
@@ -5565,20 +5664,20 @@ function toggleZone_place(id) {
         renderAllReviewSummaries();
       })
       .catch(function(e){
-        console.log('리뷰 불러오기 실패', e);
+        console.log('리뷰 로드 실패', e);
         renderReviewList(name);
       });
   }
 
   // 구글 시트에서 식당제안 불러오기
   function loadSuggests() {
-    fetch(GAS_URL + '?action=getSuggests')
+    fetch(GAS_URL + '?action=getSuggests', {redirect:'follow',mode:'cors'})
       .then(function(res){ return res.json(); })
       .then(function(data){
         _suggests = data;
         renderSuggestList();
       })
-      .catch(function(e){ console.log('제안 불러오기 실패', e); });
+      .catch(function(e){ console.log('제안 로드 실패', e); });
   }
 
   // 초기 로드
@@ -5634,7 +5733,7 @@ function toggleZone_place(id) {
     btn.textContent = '등록 중...';
     btn.disabled = true;
     fetch(GAS_URL, {
-      method: 'POST',
+      method: 'POST', redirect:'follow', mode:'no-cors',
       body: JSON.stringify({ action: 'addReview', restaurant: currentRestaurant, star: currentStar, text: text, author: author, date: date })
     })
     .then(function(){
@@ -5695,7 +5794,7 @@ function toggleZone_place(id) {
     btn.textContent = '등록 중...';
     btn.disabled = true;
     fetch(GAS_URL, {
-      method: 'POST',
+      method: 'POST', redirect:'follow', mode:'no-cors',
       body: JSON.stringify({ action: 'addSuggest', name: sname, addr: addr, reason: reason, zeropay: zeropay, date: date })
     })
     .then(function(){
