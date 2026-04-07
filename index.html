@@ -142,6 +142,17 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f4f4f6;-webkit-font-smoot
   display:flex;align-items:center;gap:6px;
   z-index:900;transition:transform 0.12s,box-shadow 0.12s
 }#page-food .fab:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,93,53,0.5)}
+.fab-review{
+  bottom:74px !important;
+  background:#1a7de0 !important;
+  box-shadow:0 4px 18px rgba(26,125,224,0.4) !important;
+}
+.fab-review:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(79,70,229,0.5) !important}
+/* 장소 탭 활성화 시 FAB 숨김 */
+.show-place ~ * .fab,
+.show-place ~ .fab {
+  display: none !important;
+}
 
 #food-notice{background:#fffbeb !important;border-bottom:1px solid #fcd34d !important;padding:10px 16px !important;font-size:12px !important;color:#78350f !important;display:flex !important;gap:8px;align-items:flex-start;max-width:100%}
 #food-notice b{font-weight:700;color:#78350f}
@@ -217,6 +228,10 @@ function switchGuide(tab) {
   }
   document.querySelectorAll('.guide-tab').forEach(function(t){ t.classList.remove('active'); });
   document.getElementById('gtab-' + tab).classList.add('active');
+  // FAB 버튼 표시/숨김
+  document.querySelectorAll('.fab').forEach(function(b){
+    b.style.display = (tab === 'place') ? 'none' : '';
+  });
   // 탭 전환 시 필터 초기화
   curZone = 'all';
   curCat = 'all';
@@ -4820,8 +4835,28 @@ function toggleZone_place(id) {
   </div>
 </div>
 
-<!-- 🍽️ FAB 버튼 -->
+<!-- 🍽️ FAB 버튼들 -->
+<button class="fab fab-review" onclick="openAllReviews()">📋 전체 리뷰</button>
 <button class="fab" onclick="openAdd()">🍽️ 식당 제안</button>
+
+<!-- 📋 전체 리뷰 모달 -->
+<div class="modal-ov" id="allReviewModal">
+  <div class="modal-box" style="max-width:520px">
+    <div class="mhdr">
+      <span class="mtitle">📋 전체 리뷰 모아보기</span>
+      <button class="mclose" onclick="closeModal('allReviewModal')">✕</button>
+    </div>
+    <div class="mbody" style="padding:14px 18px">
+      <div id="allReviewSearch" style="margin-bottom:12px">
+        <input type="text" id="allReviewSearchInput" placeholder="🔍 식당명으로 필터..."
+          oninput="filterAllReviews(this.value)"
+          style="width:100%;border:1.5px solid #e5e7eb;border-radius:9px;padding:8px 11px;font-family:inherit;font-size:13px;outline:none">
+      </div>
+      <div id="allReviewStats" style="font-size:11.5px;color:#9ca3af;margin-bottom:12px"></div>
+      <div id="allReviewList"></div>
+    </div>
+  </div>
+</div>
 
   </div>
 
@@ -5906,6 +5941,85 @@ function closeAdd() {
 updateCounts && updateCounts();
 loadAllReviews && loadAllReviews();
 
+
+// 전체 리뷰 버튼 위치를 식당 제안 버튼 바로 위에 동적 배치
+(function positionReviewFab() {
+  const fabAdd = document.querySelector('.fab:not(.fab-review)');
+  const fabReview = document.querySelector('.fab-review');
+  if (!fabAdd || !fabReview) return;
+  const rect = fabAdd.getBoundingClientRect();
+  const gap = 10;
+  const bottomFromViewport = window.innerHeight - rect.top + gap;
+  fabReview.style.bottom = bottomFromViewport + 'px';
+  fabReview.style.right = (window.innerWidth - rect.right) + 'px';
+})();
+
+function openAllReviews() {
+  const modal = document.getElementById('allReviewModal');
+  if (!modal) return;
+  document.getElementById('allReviewSearchInput').value = '';
+  renderAllReviewModal('');
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function filterAllReviews(q) {
+  renderAllReviewModal(q.trim().toLowerCase());
+}
+
+function renderAllReviewModal(q) {
+  const list = document.getElementById('allReviewList');
+  const stats = document.getElementById('allReviewStats');
+  if (!list) return;
+
+  // _reviews 객체에서 식당별 리뷰 수집
+  const entries = Object.entries(_reviews || {})
+    .filter(([name, reviews]) => reviews && reviews.length > 0)
+    .filter(([name]) => !q || name.toLowerCase().includes(q))
+    .sort((a, b) => {
+      // 최신 리뷰 기준 정렬
+      const aDate = a[1][a[1].length - 1]?.date || '';
+      const bDate = b[1][b[1].length - 1]?.date || '';
+      return bDate.localeCompare(aDate);
+    });
+
+  const totalReviews = entries.reduce((s, [, rv]) => s + rv.length, 0);
+  stats.textContent = `총 ${entries.length}개 식당 · ${totalReviews}개 리뷰`;
+
+  if (entries.length === 0) {
+    list.innerHTML = '<div style="text-align:center;color:#9ca3af;padding:32px 0;font-size:13px">리뷰가 없거나 로딩 중이에요 🍽️</div>';
+    return;
+  }
+
+  list.innerHTML = entries.map(([name, reviews]) => {
+    const avg = (reviews.reduce((s, r) => s + (r.star || 0), 0) / reviews.length).toFixed(1);
+    const stars = '★'.repeat(Math.round(avg)) + '☆'.repeat(5 - Math.round(avg));
+    const rvHTML = reviews.slice().reverse().map(r => `
+      <div style="padding:8px 0;border-bottom:1px solid #f3f4f6;display:flex;flex-direction:column;gap:2px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-size:12px;font-weight:600;color:#374151">${r.author || '익명'}</span>
+          <span style="font-size:10.5px;color:#9ca3af">${r.date || ''}</span>
+        </div>
+        <div style="color:#f59e0b;font-size:11px">${'★'.repeat(r.star || 0)}${'☆'.repeat(5-(r.star||0))}</div>
+        ${r.text ? `<div style="font-size:12.5px;color:#374151;line-height:1.6">${r.text}</div>` : ''}
+      </div>`).join('');
+    return `
+      <div style="margin-bottom:16px;border:1.5px solid #e5e7eb;border-radius:12px;overflow:hidden">
+        <div style="background:#f9fafb;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer"
+             onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='none'?'block':'none'">
+          <div>
+            <span style="font-size:14px;font-weight:700;color:#111827">${name}</span>
+            <span style="font-size:11px;color:#9ca3af;margin-left:6px">${reviews.length}개</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:4px">
+            <span style="color:#f59e0b;font-size:11.5px">${stars}</span>
+            <span style="font-size:12px;font-weight:700;color:#f59e0b">${avg}</span>
+          </div>
+        </div>
+        <div style="padding:4px 14px 8px;display:block">${rvHTML}</div>
+      </div>`;
+  }).join('');
+}
 
 /* 장소 JS */
 
