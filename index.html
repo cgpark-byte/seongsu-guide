@@ -5958,9 +5958,32 @@ function openAllReviews() {
   const modal = document.getElementById('allReviewModal');
   if (!modal) return;
   document.getElementById('allReviewSearchInput').value = '';
-  renderAllReviewModal('');
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  const hasData = Object.keys(_reviews || {}).some(k => (_reviews[k] || []).length > 0);
+  if (hasData) {
+    renderAllReviewModal('');
+  } else {
+    document.getElementById('allReviewList').innerHTML =
+      '<div style="text-align:center;color:#9ca3af;padding:32px 0;font-size:13px">리뷰 불러오는 중... ⏳</div>';
+    document.getElementById('allReviewStats').textContent = '';
+    fetch(GAS_URL + '?action=getReviews&name=ALL')
+      .then(res => res.json())
+      .then(data => {
+        _reviews = {};
+        data.forEach(r => {
+          if (!_reviews[r.restaurant]) _reviews[r.restaurant] = [];
+          _reviews[r.restaurant].push(r);
+        });
+        if (typeof renderAllReviewSummaries === 'function') renderAllReviewSummaries();
+        renderAllReviewModal('');
+      })
+      .catch(() => {
+        document.getElementById('allReviewList').innerHTML =
+          '<div style="text-align:center;color:#ef4444;padding:32px 0;font-size:13px">리뷰를 불러오지 못했어요 😢</div>';
+      });
+  }
 }
 
 function filterAllReviews(q) {
