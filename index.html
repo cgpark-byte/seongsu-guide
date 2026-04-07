@@ -5640,26 +5640,67 @@ function toggleZone_place(id) {
     }).join('');
   }
 
+
+  // ===== 구글 시트 직접 읽기 (gviz) =====
+  var REVIEW_URL = 'https://docs.google.com/spreadsheets/d/11DgGNdlvQZOjdCVRT553c2vQFPM00B5TYiCkWOzgS7E/gviz/tq?tqx=out:json&sheet=%EB%A6%AC%EB%B7%B0';
+  var SUGGEST_URL = 'https://docs.google.com/spreadsheets/d/11DgGNdlvQZOjdCVRT553c2vQFPM00B5TYiCkWOzgS7E/gviz/tq?tqx=out:json&sheet=%EC%8B%9D%EB%8B%B9%EC%A0%9C%EC%95%88';
+
+  function parseGviz(text) {
+    var match = text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*?)\);\s*$/);
+    if (!match) return [];
+    try {
+      var json = JSON.parse(match[1]);
+      var rows = json.table.rows;
+      var cols = json.table.cols;
+      return rows.map(function(row) {
+        var obj = {};
+        cols.forEach(function(col, i) {
+          obj[col.label] = (row.c && row.c[i] && row.c[i].v !== null) ? row.c[i].v : '';
+        });
+        return obj;
+      });
+    } catch(e) { console.log('gviz 파싱 오류', e); return []; }
+  }
+
   function loadAllReviews() {
-    fetch(GAS_URL + '?action=getReviews&name=ALL', {redirect:'follow',mode:'cors'})
-      .then(function(res){ return res.json(); })
-      .then(function(data){
+    fetch(REVIEW_URL)
+      .then(function(res){ return res.text(); })
+      .then(function(text){
+        var rows = parseGviz(text);
         _reviews = {};
-        data.forEach(function(r){
-          if (!_reviews[r.restaurant]) _reviews[r.restaurant] = [];
-          _reviews[r.restaurant].push(r);
+        rows.forEach(function(r){
+          var name = r['식당명'];
+          if (!name) return;
+          if (!_reviews[name]) _reviews[name] = [];
+          _reviews[name].push({
+            restaurant: name,
+            star: r['별점'],
+            text: r['리뷰내용'],
+            author: r['작성자'],
+            date: r['작성일']
+          });
         });
         renderAllReviewSummaries();
       })
       .catch(function(e){ console.log('리뷰 로드 실패', e); });
   }
 
-  // 특정 식당 리뷰 불러오기
   function loadReviewsFor(name) {
-    fetch(GAS_URL + '?action=getReviews&name=' + encodeURIComponent(name), {redirect:'follow',mode:'cors'})
-      .then(function(res){ return res.json(); })
-      .then(function(data){
-        _reviews[name] = data;
+    fetch(REVIEW_URL)
+      .then(function(res){ return res.text(); })
+      .then(function(text){
+        var rows = parseGviz(text);
+        _reviews[name] = rows
+          .filter(function(r){ return r['식당명'] === name; })
+          .map(function(r){
+            return {
+              restaurant: name,
+              star: r['별점'],
+              text: r['리뷰내용'],
+              author: r['작성자'],
+              date: r['작성일']
+            };
+          });
         renderReviewList(name);
         renderAllReviewSummaries();
       })
@@ -5669,21 +5710,54 @@ function toggleZone_place(id) {
       });
   }
 
-  // 구글 시트에서 식당제안 불러오기
   function loadSuggests() {
-    fetch(GAS_URL + '?action=getSuggests', {redirect:'follow',mode:'cors'})
-      .then(function(res){ return res.json(); })
-      .then(function(data){
-        _suggests = data;
+    fetch(SUGGEST_URL)
+      .then(function(res){ return res.text(); })
+      .then(function(text){
+        var rows = parseGviz(text);
+        _suggests = rows
+          .filter(function(r){ return r['식당명']; })
+          .map(function(r){
+            return {
+              name: r['식당명'],
+              addr: r['주소'],
+              zeropay: r['비플식권'],
+              reason: r['추천이유'],
+              date: r['날짜']
+            };
+          });
         renderSuggestList();
       })
       .catch(function(e){ console.log('제안 로드 실패', e); });
   }
 
-  // 초기 로드
-  loadAllReviews();
+  function openAllReviews() {
+    openModal('allReviewModal');
+    var list = document.getElementById('allReviewList');
+    list.innerHTML = '<div class="review-empty">불러오는 중... ⏳</div>';
+    fetch(REVIEW_URL)
+      .then(function(res){ return res.text(); })
+      .then(function(text){
+        var rows = parseGviz(text);
+        _allReviewsData = rows
+          .filter(function(r){ return r['식당명']; })
+          .map(function(r){
+            return {
+              restaurant: r['식당명'],
+              star: r['별점'],
+              text: r['리뷰내용'],
+              author: r['작성자'],
+              date: r['작성일']
+            };
+          });
+        renderAllReviewModal();
+      })
+      .catch(function(){
+        list.innerHTML = '<div class="review-empty">불러오기 실패. 다시 시도해주세요.</div>';
+      });
+  }
 
-  // ===== 모달 열기/닫기 =====
+    // ===== 모달 열기/닫기 =====
   function closeModal(id) {
     document.getElementById(id).classList.remove('open');
     document.body.style.overflow = '';
