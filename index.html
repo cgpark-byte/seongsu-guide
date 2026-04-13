@@ -100,7 +100,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f4f4f6;-webkit-font-smoot
 .cat-bar{display:flex;padding:7px 12px;gap:5px;overflow-x:auto;scrollbar-width:none}#page-food .cat-bar::-webkit-scrollbar{display:none}#page-food .cat-btn{flex-shrink:0;padding:5px 12px;border-radius:16px;border:1.5px solid #e5e7eb;background:#fff;color:#6b7280;font-size:11.5px;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.12s;white-space:nowrap}#page-food .cat-btn:hover{border-color:#374151;color:#374151}#page-food .cat-btn.active{background:#1a1a2e;border-color:#1a1a2e;color:#fff}#page-food .cat-btn.act-green{background:#16a34a;border-color:#16a34a;color:#fff}#page-food .cat-btn.act-purple{background:#7c3aed;border-color:#7c3aed;color:#fff}#page-food /* ── 검색 바 ── */
 .search-wrap{padding:8px 12px 0;display:flex;gap:8px;align-items:center}#page-food .search-box{flex:1;position:relative}#page-food .search-box input{width:100%;box-sizing:border-box;padding:8px 36px 8px 14px;border-radius:20px;border:1.5px solid #e5e7eb;font-size:13px;font-family:inherit;outline:none;background:#f9fafb;transition:all 0.15s;color:#1a1a2e}#page-food .search-box input:focus{border-color:#1a1a2e;background:#fff;box-shadow:0 0 0 3px rgba(26,26,46,0.07)}#page-food .search-box input::placeholder{color:#9ca3af}#page-food .search-box .search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#9ca3af;font-size:16px;line-height:1;padding:0;display:none}#page-food .search-box .search-clear.show{display:block}#page-food .search-result-count{font-size:12px;color:#6b7280;white-space:nowrap;min-width:48px;text-align:right}#page-food /* ── 메인 ── */
 .main{max-width:900px;margin:0 auto;padding:14px 12px 80px}#page-food /* ── 존 섹션 ── */
-.zone-sec{margin-bottom:8px;display:none}#page-food .zone-sec.show{display:block}#page-food .zone-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 8px;cursor:pointer;user-select:none}#page-food .zone-hdr-l{display:flex;align-items:center;gap:8px}#page-food .zbadge{font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:16px}#page-food .zbadge-a{background:#dcfce7;color:#16a34a}#page-food .zbadge-b{background:#fef3c7;color:#d97706}#page-food .zbadge-c{background:#fee2e2;color:#dc2626}#page-food .zdesc{font-size:11.5px;color:#9ca3af;font-weight:500}#page-food .zcnt{font-size:11px;color:#9ca3af;font-weight:600;background:#f3f4f6;padding:2px 8px;border-radius:8px}#page-food .zarrow{font-size:10px;color:#9ca3af;transition:transform 0.2s}#page-food .zone-sec.collapsed .zarrow{transform:rotate(-90deg)}#page-food .zone-grid-wrap{overflow:hidden}#page-food .zone-sec.collapsed .zone-grid-wrap{display:none}#page-food /* ── 카드 그리드 ── */
+.zone-sec{margin-bottom:8px;display:none}.zone-sec.show{display:block}#page-food .zone-sec.show{display:block}#page-food .zone-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 8px;cursor:pointer;user-select:none}#page-food .zone-hdr-l{display:flex;align-items:center;gap:8px}#page-food .zbadge{font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:16px}#page-food .zbadge-a{background:#dcfce7;color:#16a34a}#page-food .zbadge-b{background:#fef3c7;color:#d97706}#page-food .zbadge-c{background:#fee2e2;color:#dc2626}#page-food .zdesc{font-size:11.5px;color:#9ca3af;font-weight:500}#page-food .zcnt{font-size:11px;color:#9ca3af;font-weight:600;background:#f3f4f6;padding:2px 8px;border-radius:8px}#page-food .zarrow{font-size:10px;color:#9ca3af;transition:transform 0.2s}#page-food .zone-sec.collapsed .zarrow{transform:rotate(-90deg)}#page-food .zone-grid-wrap{overflow:hidden}.zone-grid-wrap{overflow:hidden}#page-food .zone-sec.collapsed .zone-grid-wrap{display:none}#page-food /* ── 카드 그리드 ── */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
@@ -173,7 +173,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:#f4f4f6;-webkit-font-smoot
 .zone-tabs{display:flex;padding:0 12px;gap:0;border-bottom:1px solid #f0f0f0;overflow-x:auto;scrollbar-width:none}#page-place .zone-tabs::-webkit-scrollbar{display:none}#page-place .zone-tab{flex:0 0 auto;padding:10px 16px;font-size:13px;font-weight:700;color:#9ca3af;border:none;background:none;cursor:pointer;font-family:inherit;border-bottom:3px solid transparent;transition:all 0.15s;white-space:nowrap}#page-place .zone-tab:hover{color:#374151}#page-place .zone-tab.active{color:#1a1a2e;border-bottom-color:#1a1a2e}#page-place .zone-tab.za.active{color:#16a34a;border-bottom-color:#16a34a}#page-place .zone-tab.zb.active{color:#d97706;border-bottom-color:#d97706}#page-place .zone-tab.zc.active{color:#dc2626;border-bottom-color:#dc2626}#page-place .zone-tab.zfree.active{color:#0891b2;border-bottom-color:#0891b2}#page-place .zone-tab-count{font-size:10px;background:#f3f4f6;color:#6b7280;padding:1px 5px;border-radius:8px;margin-left:4px;font-weight:600}#page-place /* 카테고리 */
 .cat-bar{display:flex;padding:7px 12px;gap:5px;overflow-x:auto;scrollbar-width:none}#page-place .cat-bar::-webkit-scrollbar{display:none}#page-place .cat-btn{flex-shrink:0;padding:5px 12px;border-radius:16px;border:1.5px solid #e5e7eb;background:#fff;color:#6b7280;font-size:11.5px;font-weight:600;font-family:inherit;cursor:pointer;transition:all 0.12s;white-space:nowrap}#page-place .cat-btn:hover{border-color:#374151;color:#374151}#page-place .cat-btn.active, #page-place .cat-btn.act-fashion, #page-place .cat-btn.act-beauty, #page-place .cat-btn.act-gallery, #page-place .cat-btn.act-life{background:#1a1a2e;border-color:#1a1a2e;color:#fff}#page-place /* ── 메인 ── */
 .main{max-width:900px;margin:0 auto;padding:14px 12px 80px}#page-place /* ── 존 섹션 ── */
-.zone-sec{margin-bottom:8px;display:none}#page-place .zone-sec.show{display:block}#page-place .zone-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 8px;cursor:pointer;user-select:none}#page-place .zone-hdr-l{display:flex;align-items:center;gap:8px}#page-place .zbadge{font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:16px}#page-place .zbadge-a{background:#dcfce7;color:#16a34a}#page-place .zbadge-b{background:#fef3c7;color:#d97706}#page-place .zbadge-c{background:#fee2e2;color:#dc2626}#page-place .zdesc{font-size:11.5px;color:#9ca3af;font-weight:500}#page-place .zcnt{font-size:11px;color:#9ca3af;font-weight:600;background:#f3f4f6;padding:2px 8px;border-radius:8px}#page-place .zarrow{font-size:10px;color:#9ca3af;transition:transform 0.2s}#page-place .zone-sec.collapsed .zarrow{transform:rotate(-90deg)}#page-place .zone-grid-wrap{overflow:hidden}#page-place .zone-sec.collapsed .zone-grid-wrap{display:none}#page-place /* ── 카드 그리드 ── */
+.zone-sec{margin-bottom:8px;display:none}.zone-sec.show{display:block}#page-place .zone-sec.show{display:block}#page-place .zone-hdr{display:flex;align-items:center;justify-content:space-between;padding:10px 2px 8px;cursor:pointer;user-select:none}#page-place .zone-hdr-l{display:flex;align-items:center;gap:8px}#page-place .zbadge{font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:16px}#page-place .zbadge-a{background:#dcfce7;color:#16a34a}#page-place .zbadge-b{background:#fef3c7;color:#d97706}#page-place .zbadge-c{background:#fee2e2;color:#dc2626}#page-place .zdesc{font-size:11.5px;color:#9ca3af;font-weight:500}#page-place .zcnt{font-size:11px;color:#9ca3af;font-weight:600;background:#f3f4f6;padding:2px 8px;border-radius:8px}#page-place .zarrow{font-size:10px;color:#9ca3af;transition:transform 0.2s}#page-place .zone-sec.collapsed .zarrow{transform:rotate(-90deg)}#page-place .zone-grid-wrap{overflow:hidden}#page-place .zone-sec.collapsed .zone-grid-wrap{display:none}#page-place /* ── 카드 그리드 ── */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;padding-bottom:4px}#page-place /* ── 카드 ── */
 .card{background:#1e1e1e;border-radius:12px;border:1.5px solid #f0c040;box-shadow:0 2px 8px rgba(0,0,0,0.12);cursor:pointer;transition:transform 0.12s,box-shadow 0.12s,border-color 0.12s;display:flex;flex-direction:column;overflow:hidden}#page-place .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.18);border-color:#ffd966}#page-place .card.hidden{display:none!important}#page-place .card-main{padding:11px 12px 7px;flex:1}#page-place .cn{font-size:13.5px;font-weight:700;color:#f0f0f0;line-height:1.3;letter-spacing:-0.02em;margin-bottom:6px}#page-place .ct{display:flex;flex-wrap:wrap;gap:3px}#page-place /* 태그 */
 .tag{font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;line-height:1.4}#page-place .tag-fashion{background:#3a1a1a;color:#fca5a5;border:1px solid #5a2020}#page-place .tag-beauty{background:#2a1a3a;color:#c4b5fd;border:1px solid #3d2060}#page-place .tag-gallery{background:#1a2040;color:#93c5fd;border:1px solid #1e3a70}#page-place .tag-life{background:#1a2a1a;color:#86efac;border:1px solid #1e3a25}#page-place .tag-free{background:#1a2a22;color:#6ee7b7;border:1px solid #1e3a30}#page-place .tag-paid{background:#2a2010;color:#fcd34d;border:1px solid #4a3810}#page-place .card-sub{padding:6px 12px 5px;border-top:1px solid #2e2e2e;display:flex;flex-direction:column;gap:1px}#page-place .cp{font-size:11.5px;font-weight:700;color:#e0e0e0}#page-place .ca{font-size:10.5px;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}#page-place .cdesc{font-size:10.5px;color:#aaa;margin-top:2px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}#page-place .card-bot{padding:5px 12px 8px;display:flex;align-items:center;justify-content:space-between}#page-place .wb{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:5px}#page-place .wb-a{background:#1a2e1a;color:#4ade80;border:1px solid #1e3a1e}#page-place .wb-b{background:#2e2a1a;color:#fbbf24;border:1px solid #3a3010}#page-place .wb-c{background:#2e1a1a;color:#f87171;border:1px solid #3a1e1e}#page-place .mapbtn{font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;border:1px solid #3a3a3a;background:#2a2a2a;color:#aaa;cursor:pointer;font-family:inherit;text-decoration:none;display:inline-block;transition:all 0.1s}#page-place .mapbtn:hover{background:#f0c040;border-color:#f0c040;color:#111}#page-place /* ── 성수동고릴라 + NotebookLM 통합 배너 ── */
@@ -247,10 +247,10 @@ function switchZone_food(z, btn) {
   document.querySelectorAll('#page-food .zone-tab').forEach(function(b){ b.classList.remove('active'); });
   if(btn) btn.classList.add('active');
   ['a','b','c'].forEach(function(zz){
-    var sec = document.querySelector('#page-food #zone-' + zz);
+    var sec = document.getElementById('food-zone-' + zz);
     if(!sec) return;
-    if(z==='all'||z===zz||z==='party'||z==='zp') sec.classList.add('show');
-    else sec.classList.remove('show');
+    if(z==='all'||z===zz||z==='party'||z==='zp') { sec.classList.add('show'); sec.style.display='block'; }
+    else { sec.classList.remove('show'); sec.style.display='none'; }
   });
   if(typeof applyCardFilter_food==='function') applyCardFilter_food();
 }
@@ -262,7 +262,7 @@ function setCat_food(cat, btn) {
   if(typeof applyCardFilter_food==='function') applyCardFilter_food();
 }
 
-// onSearch_food: 하단 스크립트 블록에서 정의 (존 자동 펼침 로직 포함)
+// onSearch_food: 하단 스크립트에서 정의
 
 function clearSearch_food() {
   var inp = document.getElementById('searchInput');
@@ -272,10 +272,7 @@ function clearSearch_food() {
   if(typeof applyCardFilter_food==='function') applyCardFilter_food();
 }
 
-function toggleZone_food(id) {
-  var sec = document.getElementById(id);
-  if(sec) sec.classList.toggle('collapsed');
-}
+/* toggleZone_food moved */
 
 /* ── 별점 & 모달 함수 (head 선정의) ── */
 var currentStar = 0;
@@ -326,7 +323,7 @@ function switchZone_place(z, btn) {
   document.querySelectorAll('#page-place .zone-tab').forEach(function(b){ b.classList.remove('active'); });
   if(btn) btn.classList.add('active');
   ['a','b','c'].forEach(function(zz){
-    var sec = document.querySelector('#page-place #zone-' + zz);
+    var sec = document.getElementById('place-zone-' + zz);
     if(!sec) return;
     if(z==='all'||z===zz||z==='free'||z==='hot') sec.classList.add('show');
     else sec.classList.remove('show');
@@ -453,14 +450,14 @@ function toggleZone_place(id) {
 <div class="main">
 
   <!-- A존 -->
-  <div class="zone-sec show" id="zone-a">
-    <div class="zone-hdr" onclick="toggleZone_food('zone-a')">
+  <div class="zone-sec show" id="food-zone-a">
+    <div class="zone-hdr" onclick="toggleZone_food('food-zone-a')">
       <div class="zone-hdr-l">
         <span class="zbadge zbadge-a">🟢 A존</span>
         <span class="zdesc">0.1~0.3km · 도보 5분 이내</span>
       </div>
       <div style="display:flex;align-items:center;gap:6px">
-        <span class="zcnt" id="count-a">105개</span>
+        <span class="zcnt" id="count-a">106개</span>
         <span class="zarrow">▼</span>
       </div>
     </div>
@@ -1927,7 +1924,7 @@ function toggleZone_place(id) {
     <div class="ct"><span class="tag tc">일식·우동</span><span class="tag tz">💳 비플</span></div>
   </div>
   <div class="card-sub">
-    <span class="ca"></span>
+    <span class="ca">성수이로12길 13 1층</span>
     <div class="rsummary" id="rsummary-우동키노야 성수점"></div>
   </div>
   <div class="card-bot">
@@ -1935,7 +1932,7 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'우동키노야 성수점')">✏️ 리뷰</button>
   </div>
 </div>
-<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="false" onclick="window.open('https://map.naver.com/p/entry/place/1100686645','_blank')">
+<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="false" data-place="1100686645">
   <div class="card-main">
     <div class="cn">문문문</div>
     <div class="ct"><span class="tag tc">한식·육회비빔밥</span><span class="tag tz">💳 비플</span></div>
@@ -1949,7 +1946,7 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'문문문')">✏️ 리뷰</button>
   </div>
 </div>
-<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="true" onclick="window.open('https://map.naver.com/p/entry/place/1801824267','_blank')">
+<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="true" data-place="1801824267">
   <div class="card-main">
     <div class="cn">남영동양문 성수</div>
     <div class="ct"><span class="tag tc">한식·소갈비</span><span class="tag tz">💳 비플</span><span class="tag tp">🍻 회식</span></div>
@@ -1963,7 +1960,7 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'남영동양문 성수')">✏️ 리뷰</button>
   </div>
 </div>
-<div class="card" data-zone="a" data-cat="양식" data-zeropay="true" data-party="false" onclick="window.open('https://map.naver.com/p/search/포케올데이 성수점','_blank')">
+<div class="card" data-zone="a" data-cat="양식" data-zeropay="true" data-party="false" data-search="포케올데이 성수점">
   <div class="card-main">
     <div class="cn">포케올데이 성수점</div>
     <div class="ct"><span class="tag tc">양식·포케·샐러드</span><span class="tag tz">💳 비플</span></div>
@@ -1977,13 +1974,26 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'포케올데이 성수점')">✏️ 리뷰</button>
   </div>
 </div>
-</div>
+<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="false">
+  <div class="card-main">
+    <div class="cn">지우관</div>
+    <div class="ct"><span class="tag tc">한식</span><span class="tag tz">💳 비플</span></div>
+  </div>
+  <div class="card-sub">
+    <span class="ca">뚝섬로 427-15 B1층</span>
+    <div class="rsummary" id="rsummary-지우관"></div>
+  </div>
+  <div class="card-bot">
+    <span class="wb wb-a">🚶 0.3km</span>
+    <button class="rbtn" onclick="openReview(event,'지우관')">✏️ 리뷰</button>
+  </div>
+</div></div>
     </div>
   </div>
 
   <!-- B존 -->
-  <div class="zone-sec show" id="zone-b">
-    <div class="zone-hdr" onclick="toggleZone_food('zone-b')">
+  <div class="zone-sec show" id="food-zone-b">
+    <div class="zone-hdr" onclick="toggleZone_food('food-zone-b')">
       <div class="zone-hdr-l">
         <span class="zbadge zbadge-b">🟡 B존</span>
         <span class="zdesc">0.4~0.5km · 도보 5~8분</span>
@@ -3245,8 +3255,8 @@ function toggleZone_place(id) {
   </div>
 
   <!-- C존 -->
-  <div class="zone-sec show" id="zone-c">
-    <div class="zone-hdr" onclick="toggleZone_food('zone-c')">
+  <div class="zone-sec show" id="food-zone-c">
+    <div class="zone-hdr" onclick="toggleZone_food('food-zone-c')">
       <div class="zone-hdr-l">
         <span class="zbadge zbadge-c">🔴 C존</span>
         <span class="zdesc">0.6~0.7km · 도보 10분 내외</span>
@@ -4985,8 +4995,8 @@ function toggleZone_place(id) {
 <div class="main">
 
   <!-- A존 -->
-  <div class="zone-sec show" id="zone-a">
-    <div class="zone-hdr" onclick="toggleZone_place('zone-a')">
+  <div class="zone-sec show" id="place-zone-a">
+    <div class="zone-hdr" onclick="toggleZone_place('place-zone-a')">
       <div class="zone-hdr-l"><span class="zbadge zbadge-a">🟢 A존</span><span class="zdesc">0.1~0.3km · 도보 5분 이내</span></div>
       <div style="display:flex;align-items:center;gap:6px"><span class="zcnt" id="count-a">12개</span><span class="zarrow">▼</span></div>
     </div>
@@ -5071,8 +5081,8 @@ function toggleZone_place(id) {
   </div>
 
   <!-- B존 -->
-  <div class="zone-sec show" id="zone-b">
-    <div class="zone-hdr" onclick="toggleZone_place('zone-b')">
+  <div class="zone-sec show" id="place-zone-b">
+    <div class="zone-hdr" onclick="toggleZone_place('place-zone-b')">
       <div class="zone-hdr-l"><span class="zbadge zbadge-b">🟡 B존</span><span class="zdesc">0.4~0.5km · 도보 5~8분</span></div>
       <div style="display:flex;align-items:center;gap:6px"><span class="zcnt" id="count-b">13개</span><span class="zarrow">▼</span></div>
     </div>
@@ -5161,8 +5171,8 @@ function toggleZone_place(id) {
   </div>
 
   <!-- C존 -->
-  <div class="zone-sec show" id="zone-c">
-    <div class="zone-hdr" onclick="toggleZone_place('zone-c')">
+  <div class="zone-sec show" id="place-zone-c">
+    <div class="zone-hdr" onclick="toggleZone_place('place-zone-c')">
       <div class="zone-hdr-l"><span class="zbadge zbadge-c">🔴 C존</span><span class="zdesc">0.6km+ · 도보 10분 내외</span></div>
       <div style="display:flex;align-items:center;gap:6px"><span class="zcnt" id="count-c">4개</span><span class="zarrow">▼</span></div>
     </div>
@@ -5614,7 +5624,7 @@ function toggleZone_place(id) {
 
   function applyFilter() {
     const cards = document.querySelectorAll('#page-food .card');
-    const q = (document.querySelector('#page-food #searchInput')?.value || '').trim().toLowerCase();
+    const q = (document.querySelector('#page-food #searchInput, #searchInput')?.value || '').trim().toLowerCase();
     let visibleCount = 0;
 
     cards.forEach(card => {
@@ -5654,9 +5664,7 @@ function toggleZone_place(id) {
     });
   }
 
-  function toggleZone_food(id) {
-    document.getElementById(id).classList.toggle('collapsed');
-  }
+/* toggleZone_food moved */
 
   // 초기 카운트
   updateCounts();
@@ -5882,11 +5890,13 @@ function switchZone_food(z, btn) {
   const zones = ['a','b','c'];
   // 존 섹션 표시/숨김
   zones.forEach(zz => {
-    const sec = document.querySelector('#page-food #zone-' + zz);
+    const sec = document.getElementById('food-zone-' + zz);
     if (z === 'all' || z === zz || z === 'party' || z === 'zp') {
       sec.classList.add('show');
+      sec.style.display = 'block';
     } else {
       sec.classList.remove('show');
+      sec.style.display = 'none';
     }
   });
   applyCardFilter_food();
@@ -5899,9 +5909,25 @@ function setCat_food(cat, btn) {
   applyCardFilter_food();
 }
 
+function toggleZone_food(id) {
+  const sec = document.getElementById(id);
+  if (!sec) return;
+  const wrap = sec.querySelector('.zone-grid-wrap');
+  const arrow = sec.querySelector('.zarrow');
+  if (sec.classList.contains('collapsed')) {
+    sec.classList.remove('collapsed');
+    if (wrap) { wrap.style.display = ''; wrap.style.overflow = 'visible'; }
+    if (arrow) arrow.style.transform = '';
+  } else {
+    sec.classList.add('collapsed');
+    if (wrap) wrap.style.display = 'none';
+    if (arrow) arrow.style.transform = 'rotate(-90deg)';
+  }
+}
+
 function applyCardFilter_food() {
   const z = curZone, cat = curCat;
-  const q = (document.querySelector('#page-food #searchInput')?.value || '').trim().toLowerCase();
+  const q = (document.querySelector('#page-food #searchInput, #searchInput')?.value || '').trim().toLowerCase();
   let totalVisible = 0;
   ['a','b','c'].forEach(zz => {
     let visible = 0;
@@ -5930,12 +5956,7 @@ function applyCardFilter_food() {
     const cntEl = document.querySelector('#page-food #count-' + zz);
     const total = document.querySelectorAll(`#page-food #grid-${zz} .card`).length;
     if (cntEl) cntEl.textContent = visible === total ? total + '개' : visible + '/' + total + '개';
-    const sec = document.querySelector('#page-food #zone-' + zz);
-    if (sec && sec.classList.contains('show')) {
-      if (visible === 0 && (z === 'party' || z === 'zp' || cat !== 'all')) {
-        // 빈 섹션은 접기
-      }
-    }
+    const sec = document.getElementById('food-zone-' + zz);
   });
   // 검색 결과 카운트 표시
   const countEl = document.getElementById('searchCount');
@@ -5947,8 +5968,16 @@ function onSearch_food(val) {
   if (clearBtn) clearBtn.classList.toggle('show', val.length > 0);
   if (val.length > 0) {
     ['a','b','c'].forEach(function(zz) {
-      const sec = document.querySelector('#page-food #zone-' + zz);
-      if (sec) { sec.classList.add('show'); sec.classList.remove('collapsed'); }
+      const sec = document.getElementById('food-zone-' + zz);
+      if (sec) {
+        sec.classList.add('show');
+        sec.classList.remove('collapsed');
+        sec.style.display = 'block';
+        const wrap = sec.querySelector('.zone-grid-wrap');
+        if (wrap) { wrap.style.display = ''; wrap.style.overflow = 'visible'; }
+        const arrow = sec.querySelector('.zarrow');
+        if (arrow) arrow.style.transform = '';
+      }
     });
   }
   applyCardFilter_food();
@@ -5964,10 +5993,7 @@ function clearSearch_food() {
   applyCardFilter_food();
 }
 
-function toggleZone_food(id) {
-  const sec = document.getElementById(id);
-  sec.classList.toggle('collapsed');
-}
+/* toggleZone_food moved */
 
 function submitAdd() {
   submitSuggest && submitSuggest();
@@ -6091,7 +6117,7 @@ function switchZone_place(z, btn) {
   document.querySelectorAll('.zone-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   ['a','b','c'].forEach(zz => {
-    const sec = document.querySelector('#page-place #zone-' + zz);
+    const sec = document.getElementById('place-zone-' + zz);
     if (sec) {
       if (z === 'all' || z === zz || z === 'free' || z === 'hot') sec.classList.add('show');
       else sec.classList.remove('show');
