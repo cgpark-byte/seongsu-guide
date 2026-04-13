@@ -262,11 +262,7 @@ function setCat_food(cat, btn) {
   if(typeof applyCardFilter_food==='function') applyCardFilter_food();
 }
 
-function onSearch_food(val) {
-  var cb = document.getElementById('searchClear');
-  if(cb) cb.classList.toggle('show', val.length > 0);
-  if(typeof applyCardFilter_food==='function') applyCardFilter_food();
-}
+// onSearch_food: 하단 스크립트 블록에서 정의 (존 자동 펼침 로직 포함)
 
 function clearSearch_food() {
   var inp = document.getElementById('searchInput');
@@ -5934,7 +5930,7 @@ function applyCardFilter_food() {
     const cntEl = document.querySelector('#page-food #count-' + zz);
     const total = document.querySelectorAll(`#page-food #grid-${zz} .card`).length;
     if (cntEl) cntEl.textContent = visible === total ? total + '개' : visible + '/' + total + '개';
-    const sec = document.getElementById('zone-' + zz);
+    const sec = document.querySelector('#page-food #zone-' + zz);
     if (sec && sec.classList.contains('show')) {
       if (visible === 0 && (z === 'party' || z === 'zp' || cat !== 'all')) {
         // 빈 섹션은 접기
@@ -5951,7 +5947,7 @@ function onSearch_food(val) {
   if (clearBtn) clearBtn.classList.toggle('show', val.length > 0);
   if (val.length > 0) {
     ['a','b','c'].forEach(function(zz) {
-      const sec = document.getElementById('zone-' + zz);
+      const sec = document.querySelector('#page-food #zone-' + zz);
       if (sec) { sec.classList.add('show'); sec.classList.remove('collapsed'); }
     });
   }
@@ -6095,9 +6091,11 @@ function switchZone_place(z, btn) {
   document.querySelectorAll('.zone-tab').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   ['a','b','c'].forEach(zz => {
-    const sec = document.getElementById('zone-' + zz);
-    if (z === 'all' || z === zz || z === 'free' || z === 'hot') sec.classList.add('show');
-    else sec.classList.remove('show');
+    const sec = document.querySelector('#page-place #zone-' + zz);
+    if (sec) {
+      if (z === 'all' || z === zz || z === 'free' || z === 'hot') sec.classList.add('show');
+      else sec.classList.remove('show');
+    }
   });
   applyCardFilter_place();
 }
