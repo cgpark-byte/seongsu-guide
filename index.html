@@ -1939,6 +1939,48 @@ function toggleZone_place(id) {
     <button class="rbtn" onclick="openReview(event,'우동키노야 성수점')">✏️ 리뷰</button>
   </div>
 </div>
+<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="false" onclick="window.open('https://map.naver.com/p/entry/place/1100686645','_blank')">
+  <div class="card-main">
+    <div class="cn">문문문</div>
+    <div class="ct"><span class="tag tc">한식·육회비빔밥</span><span class="tag tz">💳 비플</span></div>
+  </div>
+  <div class="card-sub">
+    <span class="ca">뚝섬로9길 11-1</span>
+    <div class="rsummary" id="rsummary-문문문"></div>
+  </div>
+  <div class="card-bot">
+    <span class="wb wb-a">🚶 0.2km</span>
+    <button class="rbtn" onclick="openReview(event,'문문문')">✏️ 리뷰</button>
+  </div>
+</div>
+<div class="card" data-zone="a" data-cat="한식" data-zeropay="true" data-party="true" onclick="window.open('https://map.naver.com/p/entry/place/1801824267','_blank')">
+  <div class="card-main">
+    <div class="cn">남영동양문 성수</div>
+    <div class="ct"><span class="tag tc">한식·소갈비</span><span class="tag tz">💳 비플</span><span class="tag tp">🍻 회식</span></div>
+  </div>
+  <div class="card-sub">
+    <span class="ca">성수이로 51</span>
+    <div class="rsummary" id="rsummary-남영동양문 성수"></div>
+  </div>
+  <div class="card-bot">
+    <span class="wb wb-a">🚶 0.1km</span>
+    <button class="rbtn" onclick="openReview(event,'남영동양문 성수')">✏️ 리뷰</button>
+  </div>
+</div>
+<div class="card" data-zone="a" data-cat="양식" data-zeropay="true" data-party="false" onclick="window.open('https://map.naver.com/p/search/포케올데이 성수점','_blank')">
+  <div class="card-main">
+    <div class="cn">포케올데이 성수점</div>
+    <div class="ct"><span class="tag tc">양식·포케·샐러드</span><span class="tag tz">💳 비플</span></div>
+  </div>
+  <div class="card-sub">
+    <span class="ca">뚝섬로11길 21 2층</span>
+    <div class="rsummary" id="rsummary-포케올데이 성수점"></div>
+  </div>
+  <div class="card-bot">
+    <span class="wb wb-a">🚶 0.2km</span>
+    <button class="rbtn" onclick="openReview(event,'포케올데이 성수점')">✏️ 리뷰</button>
+  </div>
+</div>
 </div>
     </div>
   </div>
@@ -5907,6 +5949,12 @@ function applyCardFilter_food() {
 function onSearch_food(val) {
   const clearBtn = document.getElementById('searchClear');
   if (clearBtn) clearBtn.classList.toggle('show', val.length > 0);
+  if (val.length > 0) {
+    ['a','b','c'].forEach(function(zz) {
+      const sec = document.getElementById('zone-' + zz);
+      if (sec) { sec.classList.add('show'); sec.classList.remove('collapsed'); }
+    });
+  }
   applyCardFilter_food();
 }
 
