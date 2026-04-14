@@ -6239,5 +6239,101 @@ document.querySelectorAll('.card').forEach(card => {
 applyCardFilter_place();
 
 </script>
+<!-- 4월 신규 팝업 (구글시트 연동) -->
+<div id="new-popup-overlay" style="
+  position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  z-index:9999;display:none;align-items:center;justify-content:center;
+  backdrop-filter:blur(2px);
+">
+  <div style="
+    background:#fff;border-radius:20px;padding:28px 26px 22px;
+    width:calc(100% - 48px);max-width:360px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    position:relative;animation:popupIn 0.25s ease;
+    max-height:80vh;overflow-y:auto;
+  ">
+    <style>
+      @keyframes popupIn {
+        from { opacity:0; transform:scale(0.92) translateY(10px); }
+        to   { opacity:1; transform:scale(1) translateY(0); }
+      }
+    </style>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+      <span style="background:#ef4444;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;">NEW</span>
+      <span style="font-size:15px;font-weight:800;color:#1a1a2e;">신규 비플식권 매장</span>
+      <span style="font-size:13px;">📅</span>
+    </div>
+    <div id="popup-date" style="font-size:11px;color:#9ca3af;margin-bottom:14px;"></div>
+    <p style="font-size:13px;color:#444;margin-bottom:16px;line-height:1.6;">
+      새로 추가된 비플식권 매장들이에요! 꼭 방문해보세요 😊
+    </p>
+    <div id="popup-list" style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px;">
+      <div style="text-align:center;padding:20px;color:#9ca3af;font-size:13px;">불러오는 중...</div>
+    </div>
+    <button onclick="closeNewPopup()" style="
+      width:100%;padding:11px;border-radius:12px;border:none;
+      background:#1a1a2e;color:#fff;font-size:13px;font-weight:700;
+      cursor:pointer;font-family:inherit;
+    ">확인했어요 ✓</button>
+  </div>
+</div>
+
+<script>
+const SHEET_ID = '11DgGNdlvQZOjdCVRT553c2vQFPM00B5TYiCkWOzgS7E';
+const SHEET_GID = '790209764';
+// JSON API - 로컬/배포 환경 모두 작동
+const JSON_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
+
+function closeNewPopup() {
+  document.getElementById('new-popup-overlay').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function loadNewStores() {
+  try {
+    const res = await fetch(JSON_URL);
+    const text = await res.text();
+    // 구글 JSON 응답에서 실제 JSON 추출
+    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+    const rows = json.table.rows;
+    const cols_def = json.table.cols;
+
+    // F열(index 5)이 "완료"인 행만 필터
+    const newStores = rows
+      .map(row => row.c.map(cell => cell ? (cell.v !== null && cell.v !== undefined ? String(cell.v) : '') : ''))
+      .filter(cols => (cols[5] || '').trim() === '완료');
+
+    if (newStores.length === 0) return;
+
+    // 가장 최근 제안일(E열, index 4)
+    const dates = newStores.map(c => c[4]).filter(Boolean);
+    const latestDate = dates.sort().reverse()[0] || '';
+    document.getElementById('popup-date').textContent = latestDate ? `${latestDate} 기준` : '';
+
+    // 목록 렌더링
+    const listEl = document.getElementById('popup-list');
+    listEl.innerHTML = newStores.map(cols => `
+      <div style="display:flex;align-items:flex-start;gap:10px;background:#fef9ec;border-radius:10px;padding:10px 14px;">
+        <span style="color:#f59e0b;font-size:14px;margin-top:1px;">📍</span>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a2e;">${cols[0]}</div>
+          ${cols[2] ? `<div style="font-size:11px;color:#666;margin-top:2px;">${cols[2]}</div>` : ''}
+          <div style="font-size:11px;color:#aaa;margin-top:1px;">${cols[1] || ''}</div>
+        </div>
+      </div>
+    `).join('');
+
+    // 팝업 표시
+    const overlay = document.getElementById('new-popup-overlay');
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+  } catch(e) {
+    console.log('팝업 로드 실패:', e);
+  }
+}
+
+window.addEventListener('load', loadNewStores);
+</script>
 </body>
 </html>
